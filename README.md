@@ -17,6 +17,9 @@ Student ID: <UTS student id>
 
 #### Future Addon's
 
+- Add terminal input to create a user interface in the terminal.
+- Download csv with the results.
+
 ## How to Setup
 <Provide a step-by-step description of how to get the development environment set and running.>
 
