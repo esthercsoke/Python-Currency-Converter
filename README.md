@@ -1,16 +1,25 @@
 # <project title>
 
 ## Author
-Name: <first and last name>
+Name: Esther Csoke
 Student ID: <UTS student id>
 
 ## Description
 <What your application does>
+
+- The application uses the [Frankfurter](https://www.frankfurter.app/) API to retrieve. 
+
+
 <Some of the challenges you faced>
+
+
 <Some of the features you hope to implement in the future>
+
+#### Future Addon's
 
 ## How to Setup
 <Provide a step-by-step description of how to get the development environment set and running.>
+
 <Which Python version you used>
 <Which packages and version you used>
 

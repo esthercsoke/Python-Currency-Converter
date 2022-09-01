@@ -26,6 +26,5 @@ if __name__ == "__main__":
     conversion.check_currencies()
     
     # Extract the historical rate and calculate its inverse rate (using your defined get_historical_rate() method from CurrencyConverter class)
-   
     conversion.get_historical_rate()
    

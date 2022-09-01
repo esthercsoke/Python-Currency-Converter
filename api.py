@@ -12,14 +12,11 @@ def call_get(url: str) -> requests.models.Response:
     
     
     
-    # resp = requests.get(url)
+ # resp = requests.get(url)
     # if resp.status_code == 200:
     #     return resp.json()
-    # return {}
+    # # return {}
     
-
-  
-
 # def call_get(url):
 #   resp = requests.get(url)
 #   if resp.status_code == 200:
