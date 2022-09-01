@@ -32,30 +32,24 @@ class CurrencyConverter:
         self.amount : float = 0
 
 
-
     def check_currencies(self):
         self.api.get_currencies_list()
-        self.api.check_currency(self.from_currency)
-        self.api.check_currency(self.to_currency)
         
+ 
+        if self.api.check_currency(self.from_currency) is False and self.api.check_currency(self.to_currency) is False:
+            print(f'{self.from_currency} and {self.to_currency} is not a valid curreny code')
+            sys.exit(0)
+              
+        if self.api.check_currency(self.from_currency) is False:
+            print(f'{self.from_currency} is not a valid curreny code')
+            sys.exit(0)
+        elif self.api.check_currency(self.to_currency) is False:
+            print(f'{self.to_currency} is not a valid curreny code')
+            sys.exit(0)
+        return True
         
-        """
-        Method that will check if currency codes stored in the class attributes are valid.
-        Otherwise the program will exit and display the relevant message provided in the assignment brief
-
-        Parameters
-        ----------
-        # => To be filled by student
-
-        Pseudo-code
-        ----------
-        # => To be filled by student
-
-        Returns
-        -------
-        # => To be filled by student
-        """
-        # => To be filled by student
+     
+       
 
     def reverse_rate(self):
         self.inverse_rate = 1/self.amount
