@@ -16,8 +16,8 @@ if __name__ == "__main__":
     
     check_date(date)
     
-    from_currency = args[1]
-    to_currency = args[2]
+    from_currency = args[1].upper()
+    to_currency = args[2].upper()
 
     # Instantiate an objet from your defined CurrencyConverter class with the verified 2 currency codes and date
     conversion = CurrencyConverter( from_currency, to_currency, date)
