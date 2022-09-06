@@ -5,7 +5,9 @@ class TestUrl(unittest.TestCase):
     """
     Class used for testing the url attributes of the Frankfurter class from checks.py
     """
-    # => To be filled by student
+#     # => To be filled by student
+# def test_url_format(self):
+    
 
 class TestCurrenciesList(unittest.TestCase):
     """

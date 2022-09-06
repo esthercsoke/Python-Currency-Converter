@@ -22,8 +22,9 @@ class Frankfurter:
         self.base_url : str = "https://www.frankfurter.app/"
         self.currencies_url: str = 'https://www.frankfurter.app/currencies'
         self.historical_url : str = 'https://api.frankfurter.app/'
-        self.currencies = None
+        self.currencies = self.get_currencies_list()
        
+     
      
 
     def get_currencies_list(self):
@@ -44,7 +45,8 @@ class Frankfurter:
     """
         currency_call = call_get(self.currencies_url)
         currency_json = currency_call.json()
-        self.currencies = [key for key in currency_json]
+        currencies = [key for key in currency_json]
+        return currencies
       
         
     def check_currency(self, currency):
@@ -92,4 +94,5 @@ class Frankfurter:
             return call
         except:
             print("ERROR")
+    
     

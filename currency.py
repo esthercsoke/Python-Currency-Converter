@@ -113,26 +113,23 @@ class CurrencyConverter:
         resp = self.api.get_historical_rate(self.from_currency, self.to_currency, self.date)
         # get json
         resp_json = resp.json()
-
         
-        ## GET NESTED RATE VALUE
-        # help https://stackoverflow.com/questions/64551176/dictionary-values-inside-an-unknown-key
-        for x in resp_json['rates']:
-            self.amount = resp_json['rates'][x]
-            break
+        self.amount = resp_json['rates'][self.to_currency]
         
         self.reverse_rate()
         
         self.round_rate(self.inverse_rate)
         
-
         print(f"The conversion rate on {self.date} from {self.from_currency} to {self.to_currency} was {self.amount}. The inverse rate was {self.rate}")
         
 
-    
-
-
-        # => To be filled by student
+ 
+        ## GET NESTED RATE VALUE
+        # help https://stackoverflow.com/questions/64551176/dictionary-values-inside-an-unknown-key
+        # for x in resp_json['rates']:
+        #     self.amount = resp_json['rates'][x]
+        #     print(self.amount)
+        #     break
         
-        
-        # EXAMPLE: The conversion rate on 2021-07-16 from GBP to AUD was 1.8649. The inverse rate was 0.5362
+
+       
