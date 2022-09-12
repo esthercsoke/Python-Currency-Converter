@@ -9,24 +9,21 @@ def call_get(url: str) -> requests.models.Response:
 
     Parameters
     ----------
-    # => To be filled by student
+    # url (str)
 
     Pseudo-code
     ----------
-    # Send a GET request to the API url paramater
-    # return API response as request.modes.response object
+    # Send a GET request to the API url
+    # return API response as request.modes.response object if status_code == 200
+    # else print error message and sys.exit()
     
-    Returns
+    Returns 
     -------
-    # => To be filled by student
+    # => requests.models.Response object
     """
-    
-    # Send a GET request to the API url paramater
-    # return resp as request.modes.response object
-    # if error - exit and display error message
-    
     try:
         resp = requests.get(url)
+        
         if resp.status_code == 200:
             return resp 
     except (requests.exceptions.RequestException,
@@ -34,9 +31,4 @@ def call_get(url: str) -> requests.models.Response:
         print("There is an error with Frankfurter API")
         sys.exit(0)
     return {}
-        
-    
 
-
-
-# https://stackoverflow.com/questions/52181161/handling-exceptions-from-python-requests

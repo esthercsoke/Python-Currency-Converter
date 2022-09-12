@@ -17,38 +17,38 @@ class Frankfurter:
     currencies: list
         List of available currency codes
     """
-    
+        
     def __init__(self):
-        self.base_url : str = "https://www.frankfurter.app/"
-        self.currencies_url: str = 'https://www.frankfurter.app/currencies'
-        self.historical_url : str = 'https://api.frankfurter.app/'
-        self.currencies = self.get_currencies_list()
+        self.base_url : str = 'https://www.frankfurter.app/'
+        self.currencies_url = 'https://www.frankfurter.app/currencies'
+        self.historical_url = ''
+        self.currencies =  self.get_currencies_list()
        
      
-     
-
     def get_currencies_list(self):
         """
         Method that will get the list of available currencies and returns it as a Python list.
 
         Parameters
         ----------
-        # => To be filled by student
+        # self
 
         Pseudo-code
         ----------
-        # => To be filled by student
+        # Send a GET request to Frankfurter /currencies 
+        # Extract the json currencies into a list. 
 
         Returns
         -------
-        # => To be filled by student
+        # A List populated with the available currencies 
     """
+
         currency_call = call_get(self.currencies_url)
         currency_json = currency_call.json()
-        currencies = [key for key in currency_json]
-        return currencies
+        self.currencies = [key for key in currency_json]
+        return self.currencies
       
-        
+      
     def check_currency(self, currency):
         """
         Method that will check if a provided currency code is valid and return True if that is the case.
@@ -56,15 +56,17 @@ class Frankfurter:
 
         Parameters
         ----------
-        # => To be filled by student
+        # => currency
 
         Pseudo-code
         ----------
-        # => To be filled by student
+        # Check if currency (string) is in a list of currencies
+        # If the currency is present, return true, elese return false. 
 
         Returns
         -------
-        # => To be filled by student
+        # Boolean of TRUE
+        
         """
         if currency in self.currencies:
             return True
@@ -74,25 +76,28 @@ class Frankfurter:
            
     def get_historical_rate(self, from_currency, to_currency, date, amount=1):
         """
-        Method that will call the historical API endpoint in order to get the conversion rate for a given dates and currencies. It will return an requests.models.Response object.
+        Method that will call the historical API endpoint in order to get the conversion rate for a given dates and currencies. 
+        It will return an requests.models.Response object.
 
         Parameters
         ----------
-        # => To be filled by student
+        # => from_currency, to_currency, from_date, amount
 
         Pseudo-code
         ----------
-        # => To be filled by student
+        # use call_get function to call the API GET request
+        # return as a requests.models.Response object.
 
         Returns
         -------
-        # => To be filled by student
+        # requests.models.Response object.
         """
         # make api call using custom date and return requests.models.response object
+        self.historical_url = self.base_url+date+"?amount="+str(amount)+"&from="+from_currency+"&to="+to_currency
         try:
-            call = call_get(self.historical_url+date+"?from="+from_currency+"&to="+to_currency)
+            call = call_get(self.historical_url)
             return call
         except:
-            print("ERROR")
+            print("There is an error with Frankfurter API")
     
     

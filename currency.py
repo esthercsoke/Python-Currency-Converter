@@ -26,16 +26,35 @@ class CurrencyConverter:
         self.from_currency : str = from_currency
         self.to_currency : str = to_currency
         self.date : str = date
-        self.rate : float = None
-        self.inverse_rate : float = None
-        self.amount : float = 0
+        self.rate : float()
+        self.inverse_rate : float()
+        self.amount : float()
         self.api = Frankfurter()
 
 
     def check_currencies(self):
+        """
+        Method that will check if currency codes stored in the class attributes are valid.
+        Otherwise the program will exit and display the relevant message provided in the assignment brief
+
+        Parameters
+        ----------
+        # self
+
+        Pseudo-code
+        ----------
+        # initiate get_currencies_list()
+        # if statement to check whether both currencies are in the list of currencies from the API
+        # if incorrect - return error message and sys.ext()
+        # check if either currency is not in the list of currencies
+        # sys.exit and display error message if false
+
+        Returns
+        -------
+        # => returns boolean (true)
+        """
         self.api.get_currencies_list()
         
- 
         if self.api.check_currency(self.from_currency) is False and self.api.check_currency(self.to_currency) is False:
             print(f'{self.from_currency} and {self.to_currency} is not a valid curreny code')
             sys.exit(0)
@@ -49,28 +68,31 @@ class CurrencyConverter:
         return True
         
      
-       
-
     def reverse_rate(self):
         """
         Method that will calculate the inverse rate from the value stored in the class attribute, round it to 4 decimal places and save it back in the class attribute inverse_rate.
 
         Parameters
         ----------
-        # => To be filled by student
+        # self
 
         Pseudo-code
         ----------
-        # => To be filled by student
+        # calculate the inverse rate of self.rate and assign it to a variable
+        # round the inverse rate using round_rate()
+        # assign to self.inverse_rate attribute
 
         Returns
         -------
-        # => To be filled by student
+        # attribute self.inverse_rate is updated
         """
-        # => To be filled by student
-        self.inverse_rate = 1/self.amount
+ 
+        inverse_currency = self.amount / self.rate
+    
+        rounded_inverse = self.round_rate(inverse_currency)
+
+        self.inverse_rate = rounded_inverse
         
-       
 
     def round_rate(self, rate):
         """
@@ -78,19 +100,18 @@ class CurrencyConverter:
 
         Parameters
         ----------
-        # => To be filled by student
+        # => self, rate
 
         Pseudo-code
         ----------
-        # => To be filled by student
+        # round the argument rate to 4 decimals and return it.
 
         Returns
         -------
-        # => To be filled by student
+        # => float (4 dec)
         """
-        self.rate = round(rate, 4)
+        return round(rate, 4)
 
-       
 
     def get_historical_rate(self):
         """
@@ -99,37 +120,38 @@ class CurrencyConverter:
 
         Parameters
         ----------
-        # => To be filled by student
+        # => self
 
         Pseudo-code
         ----------
-        # => To be filled by student
-
+        # call API _ get historical conversion rate for currencies
+        # Once returned, extract json from requests.models.Response object
+        # extract value from amount key and assign it to self.amount
+        # extract the value from the rates key
+        # rount the extracted rate and assign it to self.rate
+        # use the reverse_rate() function
+        # print out results 
+        
         Returns
         -------
-        # => To be filled by student
+        # => string
         """
-        # call API _ get historical conversion rate for currencies
+    
         resp = self.api.get_historical_rate(self.from_currency, self.to_currency, self.date)
-        # get json
+        
         resp_json = resp.json()
+     
+        self.amount = resp_json.get('amount')
         
-        self.amount = resp_json['rates'][self.to_currency]
+        extract_rate = resp_json['rates'][self.to_currency]
         
+        self.rate = self.round_rate(extract_rate)
+      
         self.reverse_rate()
         
-        self.round_rate(self.inverse_rate)
-        
-        print(f"The conversion rate on {self.date} from {self.from_currency} to {self.to_currency} was {self.amount}. The inverse rate was {self.rate}")
+        print(f"The conversion rate on {self.date} from {self.from_currency} to {self.to_currency} was {self.rate}. The inverse rate was {self.inverse_rate}")
         
 
- 
-        ## GET NESTED RATE VALUE
-        # help https://stackoverflow.com/questions/64551176/dictionary-values-inside-an-unknown-key
-        # for x in resp_json['rates']:
-        #     self.amount = resp_json['rates'][x]
-        #     print(self.amount)
-        #     break
-        
+
 
        
